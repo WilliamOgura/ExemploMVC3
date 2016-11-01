@@ -24,5 +24,11 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["msg"] = "Aluno Cadastrado";
             return RedirectToAction("Cadastro");
         }
+        
+        public ActionResult Listar()
+        {
+            var lista = _context.Aluno.ToList();
+            return View(lista);
+        }
     }
 }
