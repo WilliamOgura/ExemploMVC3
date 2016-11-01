@@ -1,0 +1,30 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Aluno
+@{
+    ViewBag.Title = "Cadastro";
+}
+
+<h2>Cadastro</h2>
+@Helper.Message(TempData["msg"], "alert alert-success")
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(a => a.Nome)
+        @Html.TextBoxFor(a => a.Nome, new { placeholder = "Digite seu nome", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(a => a.DataNascimento)
+        @Html.TextBoxFor(a => a.DataNascimento, new { placeholder = "XX/XX/XXXX", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.CheckBoxFor(a => a.Bolsa)
+        @Html.LabelFor(a => a.Bolsa)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(a => a.Desconto)
+        @Html.TextBoxFor(a => a.Desconto, new { placeholder = "%", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Helper.Submit("Salvar", "btn btn-primary")
+    </div>
+}
