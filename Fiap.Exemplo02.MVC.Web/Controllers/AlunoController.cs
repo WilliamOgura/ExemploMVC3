@@ -30,5 +30,20 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var lista = _context.Aluno.ToList();
             return View(lista);
         }
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {   //Buscar o objeto (aluno no banco
+            var aluno = _context.Aluno.Find(id);
+            // manda o aluno para a view
+            return View(aluno);
+        }
+        [HttpPost]
+        public ActionResult Editar(Aluno aluno)
+        {
+            _context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+            TempData["msg"] = "Aluno atualizado";
+            return RedirectToAction("Listar");
+        }
     }
 }

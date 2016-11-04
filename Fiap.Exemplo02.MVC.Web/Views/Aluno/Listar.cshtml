@@ -4,6 +4,7 @@
 }
 
 <h2>Listar</h2>
+@Helper.Message(TempData["msg"], "alert alert-success")
 
 <table class="table">
     <thead>
@@ -12,6 +13,7 @@
             <th>Data de Nascimento</th>
             <th>Bolsa</th>
             <th>Desconto</th>
+            <th></th>
          </tr>
     </thead>
     <tbody>
@@ -22,7 +24,9 @@
                 <td>@aluno.DataNascimento.Year</td>
                 <td>@aluno.Bolsa</td>
                 <td>@aluno.Desconto</td>
-               
+                <td>
+                    @Html.ActionLink("Editar","Editar", new { id = @aluno.Id }, new { @class = "btn btn-primary" })
+                </td>
             </tr>
         }
     </tbody>
