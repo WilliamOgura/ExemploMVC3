@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Nota" Type="float" />
         </EntityType>
@@ -27,21 +27,21 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Nome" Nullable="false" MaxLength="150" Type="varchar" />
-          <Property Name="Descricao" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="DataInicio" Type="datetime" />
           <Property Name="dataTermino" Type="datetime" />
-          <Property Name="Entregue" Nullable="false" Type="bit" />
+          <Property Name="Entregue" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Grupo_Projeto">
-          <End Type="Self.Projeto" Multiplicity="1" Role="Projeto" />
-          <End Type="Self.Grupo" Multiplicity="0..1" Role="Grupo" />
+        <Association Name="FK_Projeto_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Projeto" Type="Self.Projeto" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Projeto">
+            <Principal Role="Grupo">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Grupo">
+            <Dependent Role="Projeto">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -50,9 +50,9 @@
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projeto" EntityType="Self.Projeto" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Grupo_Projeto" Association="Self.FK_Grupo_Projeto">
-            <End EntitySet="Projeto" Role="Projeto" />
-            <End EntitySet="Grupo" Role="Grupo" />
+          <AssociationSet Name="FK_Projeto_Grupo" Association="Self.FK_Projeto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Projeto" EntitySet="Projeto" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -73,9 +73,9 @@
           <EntitySet Name="Aluno" EntityType="Self.Aluno" />
           <EntitySet Name="Grupo" EntityType="Fiap.Exemplo02.Database.Model.Grupo" />
           <EntitySet Name="Projeto" EntityType="Fiap.Exemplo02.Database.Model.Projeto" />
-          <AssociationSet Name="FK_Grupo_Projeto" Association="Fiap.Exemplo02.Database.Model.FK_Grupo_Projeto">
-            <End EntitySet="Projeto" Role="Projeto" />
-            <End EntitySet="Grupo" Role="Grupo" />
+          <AssociationSet Name="FK_Projeto_Grupo" Association="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Projeto" EntitySet="Projeto" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grupo">
@@ -85,7 +85,7 @@
           <Property Name="Id" Nullable="false" Type="Int32" />
           <Property Name="Nome" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="Nota" Type="Double" />
-          <NavigationProperty Name="Projeto" Relationship="Fiap.Exemplo02.Database.Model.FK_Grupo_Projeto" FromRole="Grupo" ToRole="Projeto" />
+          <NavigationProperty Name="Projeto" Relationship="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" FromRole="Grupo" ToRole="Projeto" />
         </EntityType>
         <EntityType Name="Projeto">
           <Key>
@@ -97,16 +97,16 @@
           <Property Name="DataInicio" Precision="3" Type="DateTime" />
           <Property Name="dataTermino" Precision="3" Type="DateTime" />
           <Property Name="Entregue" Nullable="false" Type="Boolean" />
-          <NavigationProperty Name="Grupo" Relationship="Fiap.Exemplo02.Database.Model.FK_Grupo_Projeto" FromRole="Projeto" ToRole="Grupo" />
+          <NavigationProperty Name="Grupo" Relationship="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" FromRole="Projeto" ToRole="Grupo" />
         </EntityType>
-        <Association Name="FK_Grupo_Projeto">
-          <End Type="Fiap.Exemplo02.Database.Model.Projeto" Multiplicity="1" Role="Projeto" />
-          <End Type="Fiap.Exemplo02.Database.Model.Grupo" Multiplicity="0..1" Role="Grupo" />
+        <Association Name="FK_Projeto_Grupo">
+          <End Type="Fiap.Exemplo02.Database.Model.Grupo" Role="Grupo" Multiplicity="1" />
+          <End Type="Fiap.Exemplo02.Database.Model.Projeto" Role="Projeto" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Projeto">
+            <Principal Role="Grupo">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Grupo">
+            <Dependent Role="Projeto">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>

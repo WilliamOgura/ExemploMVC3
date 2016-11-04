@@ -1,0 +1,30 @@
+﻿@model Fiap.Exemplo02.MVC.Web.Models.Grupo
+@{
+    ViewBag.Title = "Cadastro";
+}
+
+<h2>Cadastro</h2>
+@Helper.Message(TempData["msg"], "alert alert-success")
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Nome do Grupo")
+        @Html.TextBoxFor(g => g.Nome, new { placeholder = "Digite o nome do Grupo", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Nome do Projeto")
+        @Html.TextBoxFor(g => g.Projeto.Nome, new { placeholder = "Digite o Nome do Projeto", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(g => g.Projeto.Descricao)
+        @Html.TextBoxFor(g => g.Projeto.Descricao, new { placeholder = "Digite a Descrição do Projeto", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(g => g.Projeto.DataInicio)
+        @Html.TextBoxFor(g => g.Projeto.DataInicio, new { placeholder = "XX/XX/XXXX", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Helper.Submit("Salvar", "btn btn-primary")
+    </div>
+}
