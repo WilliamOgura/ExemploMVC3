@@ -6,6 +6,12 @@
 <h2>Listar</h2>
 @Helper.Message(TempData["msg"], "alert alert-success")
 
+@using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { @class = "form-inline" }))
+{
+    @Html.TextBox("nomeBusca", "", new { @class = "form-control", placeholder="Digite um nome"})
+    @Helper.Submit("Buscar", "btn btn-primary")
+}
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -26,7 +32,7 @@
                 <td>@aluno.Desconto</td>
                 <td>
                     @Html.ActionLink("Editar", "Editar", new { id = @aluno.Id }, new { @class = "btn btn-primary" })
-                    <button onclick="alunoId.value = @aluno.Id"type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                    <button onclick="alunoId.value = @aluno.Id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
                         Excluir
                     </button>
                 </td>
@@ -51,7 +57,7 @@
                 @using (Html.BeginForm("Excluir", "Aluno"))
                 {
 
-                    <input type="hidden" id="alunoId" name="alunoId"/>
+                    <input type="hidden" id="alunoId" name="alunoId" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                     <button type="submit" class="btn btn-danger">Sim</button>
                 }

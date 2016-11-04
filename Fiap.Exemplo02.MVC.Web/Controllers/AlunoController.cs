@@ -24,7 +24,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["msg"] = "Aluno Cadastrado";
             return RedirectToAction("Cadastro");
         }
-        
+
         public ActionResult Listar()
         {
             var lista = _context.Aluno.ToList();
@@ -46,13 +46,21 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             return RedirectToAction("Listar");
         }
         [HttpPost]
-        public ActionResult Excluir (int AlunoId)
+        public ActionResult Excluir(int AlunoId)
         {
             var aluno = _context.Aluno.Find(AlunoId);
             _context.Aluno.Remove(aluno);
             _context.SaveChanges();
             TempData["msg"] = "Aluno excluido";
             return RedirectToAction("Listar");
+        }
+        [HttpGet]
+        public ActionResult Buscar(string nomeBusca)
+        {
+            //Busca O aluno no banco por parte do nome
+            var lista = _context.Aluno.Where(a => a.Nome.Contains(nomeBusca)).ToList();
+            //retorna para a view Listar com a lista
+            return View("Listar", lista);
         }
     }
 }
