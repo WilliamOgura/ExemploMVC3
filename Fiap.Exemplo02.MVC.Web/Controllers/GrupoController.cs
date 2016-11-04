@@ -31,5 +31,14 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var lista = _context.Grupo.ToList();
             return View(lista);
         }
+
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {   
+            var grupo = _context.Grupo.Find(id);
+            return View(grupo);
+        }
+
+
     }
 }
