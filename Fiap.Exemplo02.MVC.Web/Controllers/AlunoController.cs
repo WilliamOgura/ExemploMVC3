@@ -45,5 +45,14 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             TempData["msg"] = "Aluno atualizado";
             return RedirectToAction("Listar");
         }
+        [HttpPost]
+        public ActionResult Excluir (int AlunoId)
+        {
+            var aluno = _context.Aluno.Find(AlunoId);
+            _context.Aluno.Remove(aluno);
+            _context.SaveChanges();
+            TempData["msg"] = "Aluno excluido";
+            return RedirectToAction("Listar");
+        }
     }
 }
