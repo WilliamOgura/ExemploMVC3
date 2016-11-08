@@ -13,6 +13,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         // GET: Aluno
         public ActionResult Cadastro()
         {
+            var lista = _context.Grupo.ToList();
+            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
             return View();
         }
 
