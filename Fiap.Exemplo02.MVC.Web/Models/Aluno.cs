@@ -27,8 +27,10 @@ namespace Fiap.Exemplo02.MVC.Web.Models
         public Nullable<double> Desconto { get; set; }
         public int GrupoId { get; set; }
     
-        public virtual Grupo Grupo { get; set; }
+        //Virtual busca o objeto e faz a relação automaticamente no banco e puxa a lista
+        public  Grupo Grupo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //Na collection é diferente, ele não busca pois teriamos problemas buscando a collection inteira 
         public virtual ICollection<Professor> Professor { get; set; }
     }
 }

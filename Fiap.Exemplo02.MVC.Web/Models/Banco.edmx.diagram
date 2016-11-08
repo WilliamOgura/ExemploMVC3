@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7d5a9b22d9c94bddb3cf55e31b8dd81a" Name="Diagram1">
-        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Aluno" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Grupo" PointX="6.375" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Projeto" PointX="8.125" PointY="0.625" Width="1.5" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Aluno" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Grupo" PointX="5.125" PointY="0.625" Width="1.5" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Projeto" PointX="7.125" PointY="0.625" Width="1.5" />
         <AssociationConnector Association="Fiap.Exemplo02.Database.Model.FK_Projeto_Grupo" />
         <AssociationConnector Association="Fiap.Exemplo02.Database.Model.FK_Aluno_Grupo" />
-        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Professor" Width="1.5" PointX="2" PointY="1" />
+        <EntityTypeShape EntityType="Fiap.Exemplo02.Database.Model.Professor" Width="1.5" PointX="1.125" PointY="0.625" />
         <AssociationConnector Association="Fiap.Exemplo02.Database.Model.ProfessorAluno" />
       </Diagram>
     </edmx:Diagrams>

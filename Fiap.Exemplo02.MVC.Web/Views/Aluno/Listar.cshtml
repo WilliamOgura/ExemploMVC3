@@ -19,6 +19,7 @@
             <th>Data de Nascimento</th>
             <th>Bolsa</th>
             <th>Desconto</th>
+            <th>Grupo</th>
             <th></th>
         </tr>
     </thead>
@@ -27,9 +28,10 @@
             {
             <tr>
                 <td>@aluno.Nome</td>
-                <td>@aluno.DataNascimento.Year</td>
+                <td>@aluno.DataNascimento</td>
                 <td>@aluno.Bolsa</td>
                 <td>@aluno.Desconto</td>
+                <td>@aluno.Grupo.Nome</td>
                 <td>
                     @Html.ActionLink("Editar", "Editar", new { id = @aluno.Id }, new { @class = "btn btn-primary" })
                     <button onclick="alunoId.value = @aluno.Id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
