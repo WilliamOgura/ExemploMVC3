@@ -1,4 +1,5 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
+using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,22 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 {
     public class AlunoController : Controller
     {
-        private PortalContext _context = new PortalContext();
-        // GET: Aluno
+        // private PortalContext _context = new PortalContext();
+        private UnitOfWork _unit = new UnitOfWork();
+
+        [HttpGet]
         public ActionResult Cadastro()
         {
-            var lista = _context.Grupo.ToList();
-            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
+            ViewBag.grupos = new SelectList(_unit.AlunoRepository.Listar(), "Id", "Nome");
             return View();
         }
 
         [HttpPost]
         public ActionResult Cadastro(Aluno aluno)
         {
-            _context.Aluno.Add(aluno);
-            _context.SaveChanges();
+
+            _unit.AlunoRepository.Cadastrar(aluno);
+            _unit.Salvar();
             TempData["msg"] = "Aluno Cadastrado";
             return RedirectToAction("Cadastro");
         }
@@ -31,6 +34,8 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             //Include -> Busca o relacionamento (preenche o grupo que o aluno possui), faz o join
             var lista = _context.Aluno.Include("Grupo").ToList();
+
+            _unit.AlunoRepository.Listar();
             return View(lista);
         }
         [HttpGet]
@@ -64,6 +69,12 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var lista = _context.Aluno.Where(a => a.Nome.Contains(nomeBusca)).ToList();
             //retorna para a view Listar com a lista
             return View("Listar", lista);
+        }
+
+        protected override void Dispose(bool disposing)
+        {   
+            _unit.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
