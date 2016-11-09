@@ -9,9 +9,14 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
     public class GrupoRepository: IGrupoRepository
     {
+        private PortalContext _context;
+        public GrupoRepository(PortalContext contenxt)
+        {
+            _context = contenxt;
+        }
         public ICollection<Grupo> Listar()
         {
-            throw new NotImplementedException();
+            return _context.Grupo.ToList();
         }
 
         

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Data.Entity;
+using Fiap.Exemplo02.MVC.Web.Models;
 
 namespace Fiap.Exemplo02.MVC.Web.Repositories
 {
@@ -14,12 +15,12 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 
         public AlunoRepository(PortalContext context)
         {
-            _context = context;
+            this._context = context;
         }
+
         public void Atualizar(Aluno aluno)
         {
-            _context.Entry(aluno).State = EntityState.Modified;
-          
+            _context.Entry(aluno).State = System.Data.Entity.EntityState.Modified;
         }
 
         public ICollection<Aluno> BuscarPor(Expression<Func<Aluno, bool>> filtro)
@@ -39,7 +40,7 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
 
         public ICollection<Aluno> Listar()
         {
-            return _context.Aluno.ToList();
+            return _context.Aluno.Include("Grupo").ToList();
         }
 
         public void Remover(int id)

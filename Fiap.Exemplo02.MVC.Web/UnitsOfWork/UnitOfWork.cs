@@ -27,7 +27,21 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
             }
         }
 
-       
+        //GRUPO
+        private IGrupoRepository _grupoRepository;
+
+        public IGrupoRepository GrupoRepository
+        {
+            get
+            {
+                if (_grupoRepository == null)
+                {
+                    _grupoRepository = new GrupoRepository(_context);
+                }
+                return _grupoRepository;
+            }
+        }
+
 
         public void Salvar()
         {
