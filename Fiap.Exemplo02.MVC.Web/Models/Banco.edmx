@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Fiap.Exemplo02.Database.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Aluno">
           <Key>
             <PropertyRef Name="Id" />
@@ -100,6 +106,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FiapExemplo02DatabaseModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
@@ -156,6 +163,7 @@
             <End Role="Aluno" EntitySet="Aluno" />
             <End Role="Professor" EntitySet="Professor" />
           </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="Fiap.Exemplo02.Database.Model.C__RefactorLog" />
         </EntityContainer>
         <EntityType Name="Grupo">
           <Key>
@@ -216,6 +224,12 @@
           <End Type="Fiap.Exemplo02.Database.Model.Aluno" Role="Aluno" Multiplicity="*" />
           <End Type="Fiap.Exemplo02.Database.Model.Professor" Role="Professor" Multiplicity="*" />
         </Association>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +286,13 @@
               <ScalarProperty Name="Id" ColumnName="AlunoId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Database.Model.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

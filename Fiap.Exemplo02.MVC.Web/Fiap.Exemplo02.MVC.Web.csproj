@@ -173,10 +173,14 @@
     <Compile Include="Controllers\AlunoController.cs" />
     <Compile Include="Controllers\EcommerceContext.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Aluno.cs">
+      <DependentUpon>Banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__RefactorLog.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AlunoRepository.cs" />
@@ -208,6 +212,8 @@
     <Compile Include="Repositories\GrupoRepository.cs" />
     <Compile Include="Repositories\IAlunoRepository.cs" />
     <Compile Include="Repositories\IGrupoRepository.cs" />
+    <Compile Include="Repositories\IProfessorRepository.cs" />
+    <Compile Include="Repositories\ProfessorRepository.cs" />
     <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,8 @@
     <Content Include="Views\Grupo\Editar.cshtml" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Professor\Cadastro.cshtml" />
+    <Content Include="Views\Professor\Listar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,30 @@
+﻿@model List<Fiap.Exemplo02.MVC.Web.Models.Professor>
+@{
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Salário</th>
+             <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var professor in Model)
+            {
+            <tr>
+                <td>@professor.Nome</td>
+                <td>@professor.Salario</td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = @professor.Id }, new { @class = "btn btn-primary" })
+                    <button onclick="alunoId.value = @professor.Id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

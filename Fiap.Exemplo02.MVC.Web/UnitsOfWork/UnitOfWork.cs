@@ -42,6 +42,19 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
             }
         }
 
+        private IProfessorRepository _professorRepository;
+
+        public IProfessorRepository ProfessorRepository
+        {
+            get
+            {
+                if (_professorRepository == null)
+                {
+                    _professorRepository = new ProfessorRepository(_context);
+                }
+                return _professorRepository;
+            }
+        }
 
         public void Salvar()
         {
