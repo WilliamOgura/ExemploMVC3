@@ -39,7 +39,10 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         }
         [HttpGet]
         public ActionResult Editar(int id)
-        {   //Buscar o objeto (aluno no banco
+        {
+            var lista = _unit.GrupoRepository.Listar();
+            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
+            //Buscar o objeto (aluno no banco
             var aluno = _unit.AlunoRepository.BuscarPorId(id);
             // manda o aluno para a view
             return View(aluno);
