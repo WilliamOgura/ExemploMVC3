@@ -3,13 +3,23 @@
     ViewBag.Title = "Listar";
 }
 
-<h2>Listar</h2>
+<h2>Listar Alunos</h2>
 @Helper.Message(TempData["msg"], "alert alert-success")
 
 @using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { @class = "form-inline" }))
 {
-    @Html.TextBox("nomeBusca", "", new { @class = "form-control", placeholder="Digite um nome"})
-    @Helper.Submit("Buscar", "btn btn-primary")
+    <div class="row">
+        <div class="col-md-3">
+            @Html.TextBox("nomeBusca", "", new { @class = "form-control", placeholder = "Digite um nome" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("idGrupo", ViewBag.grupos as SelectList, "Togos os Grupos", new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Helper.Submit("Buscar", "btn btn-primary")
+        </div>
+    </div>
+    
 }
 
 <table class="table table-striped">
@@ -29,7 +39,7 @@
             <tr>
                 <td>@aluno.Nome</td>
                 <td>@aluno.DataNascimento</td>
-                <td>@aluno.Bolsa</td>
+                <td>@(aluno.Bolsa?"Sim":"Não")</td>
                 <td>@aluno.Desconto</td>
                 <td>@aluno.Grupo.Nome</td>
                 <td>
@@ -45,11 +55,12 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Confirmação</h4>
             </div>
             <div class="modal-body">

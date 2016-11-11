@@ -21,9 +21,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Cadastro de Aluno", "Cadastro", "Aluno")</li>
-                    <li>@Html.ActionLink("Alunos", "Listar", "Aluno")</li>
-                </ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aluno <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cadastro de Aluno", "Cadastro", "Aluno")</li>
+                            <li>@Html.ActionLink("Alunos", "Listar", "Aluno")</li>
+                        </ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Grupo <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cadastro de Grupo", "Cadastro", "Grupo")</li>
+                            <li>@Html.ActionLink("Grupos", "Listar", "Grupo")</li>
+                        </ul>
+                    </li>
+               </ul>
             </div>
         </div>
     </div>
@@ -35,7 +46,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
+    <script src="~/scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
