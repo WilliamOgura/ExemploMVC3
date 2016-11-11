@@ -13,7 +13,7 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
         private PortalContext _context = new PortalContext();
 
         // ALUNO
-        private IGenericRepository _alunoRepository;
+        private IGenericRepository<Aluno> _alunoRepository;
 
         public IGenericRepository<Aluno> AlunoRepository
         {
