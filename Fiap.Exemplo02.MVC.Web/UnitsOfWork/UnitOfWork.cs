@@ -12,49 +12,64 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
     {
         private PortalContext _context = new PortalContext();
 
+        // ALUNO
+        private IGenericRepository _alunoRepository;
 
-        private IAlunoRepository _alunoRepository;
-
-        public IAlunoRepository AlunoRepository
+        public IGenericRepository<Aluno> AlunoRepository
         {
             get
             {
                 if (_alunoRepository == null)
                 {
-                    _alunoRepository = new AlunoRepository(_context);
+                    _alunoRepository = new GenericRepository<Aluno>(_context);
                 }
                 return _alunoRepository;
             }
         }
 
         //GRUPO
-        private IGrupoRepository _grupoRepository;
+        private IGenericRepository<Grupo> _grupoRepository;
 
-        public IGrupoRepository GrupoRepository
+        public IGenericRepository<Grupo> GrupoRepository
         {
             get
             {
                 if (_grupoRepository == null)
                 {
-                    _grupoRepository = new GrupoRepository(_context);
+                    _grupoRepository = new GenericRepository<Grupo>(_context);
                 }
                 return _grupoRepository;
             }
         }
+        ////PROFESSOR
+        //private IProfessorRepository _professorRepository;
 
-        private IProfessorRepository _professorRepository;
+        //public IProfessorRepository ProfessorRepository
+        //{
+        //    get
+        //    {
+        //        if (_professorRepository == null)
+        //        {
+        //            _professorRepository = new ProfessorRepository(_context);
+        //        }
+        //        return _professorRepository;
+        //    }
+        //}
 
-        public IProfessorRepository ProfessorRepository
+
+        private IGenericRepository<Professor> _professorRepository;
+        public IGenericRepository<Professor> ProfessorRepository
         {
             get
             {
-                if (_professorRepository == null)
+                if(_professorRepository == null)
                 {
-                    _professorRepository = new ProfessorRepository(_context);
+                    _professorRepository = new GenericRepository<Professor>(_context);
                 }
                 return _professorRepository;
             }
         }
+
 
         public void Salvar()
         {
