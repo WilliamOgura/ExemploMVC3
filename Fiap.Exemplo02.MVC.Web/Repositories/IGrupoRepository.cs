@@ -10,5 +10,9 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
     public interface IGrupoRepository
     {
         ICollection<Grupo> Listar();
+        void Cadastrar(Grupo grupo);
+        void Atualizar(Grupo grupo);
+        void Remover(int id);
+        Grupo BuscarPorId(int id);
     }
 }

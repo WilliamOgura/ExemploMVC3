@@ -14,11 +14,33 @@ namespace Fiap.Exemplo02.MVC.Web.Repositories
         {
             _context = contenxt;
         }
+
+        public void Atualizar(Grupo grupo)
+        {
+            _context.Entry(grupo).State = System.Data.Entity.EntityState.Modified;
+        }
+
+        public Grupo BuscarPorId(int id)
+        {
+            return _context.Grupo.Find(id);
+        }
+
+        public void Cadastrar(Grupo grupo)
+        {
+            _context.Grupo.Add(grupo);
+        }
+
         public ICollection<Grupo> Listar()
         {
             return _context.Grupo.ToList();
         }
 
-        
+        public void Remover(int id)
+        {
+            var grupo = BuscarPorId(id);
+            _context.Grupo.Remove(grupo);
+        }
+
+       
     }
 }
