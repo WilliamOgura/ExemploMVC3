@@ -41,30 +41,15 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
                 return _grupoRepository;
             }
         }
-        ////PROFESSOR
-        //private IProfessorRepository _professorRepository;
 
-        //public IProfessorRepository ProfessorRepository
-        //{
-        //    get
-        //    {
-        //        if (_professorRepository == null)
-        //        {
-        //            _professorRepository = new ProfessorRepository(_context);
-        //        }
-        //        return _professorRepository;
-        //    }
-        //}
-
-
-        private IGenericRepository<Professor> _professorRepository;
-        public IGenericRepository<Professor> ProfessorRepository
+        private IProfessorRepository _professorRepository;
+        public IProfessorRepository ProfessorRepository
         {
             get
             {
                 if(_professorRepository == null)
                 {
-                    _professorRepository = new GenericRepository<Professor>(_context);
+                    _professorRepository = new ProfessorRepository(_context);
                 }
                 return _professorRepository;
             }
