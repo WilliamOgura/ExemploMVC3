@@ -1,5 +1,6 @@
 ﻿using Fiap.Exemplo02.MVC.Web.Models;
 using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
+using Fiap.Exemplo02.MVC.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,18 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         [HttpGet]
         public ActionResult Cadastro()
         {
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos()
+            };
+            
+            return View(viewModel);
+        }
+
+        private SelectList ListarGrupos()
+        {
             var lista = _unit.GrupoRepository.Listar();
-            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
-            return View();
+            return new SelectList(lista, "Id", "Nome");
         }
 
         [HttpGet]
