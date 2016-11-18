@@ -5,16 +5,19 @@
 
 <h2>Cadastro</h2>
 @Helper.Message(Model.Mensagem, "alert alert-success")
+@Html.ValidationSummary() <!-- Todas as mensagens-->
 
 @using (Html.BeginForm())
 {
     <div class="form-group">
         @Html.LabelFor(a => a.Nome)
         @Html.TextBoxFor(a => a.Nome, new { placeholder = "Digite seu nome", @class = "form-control" })
+        @Html.ValidationMessageFor( a => a.Nome)
     </div>
     <div class="form-group">
         @Html.LabelFor(a => a.DataNascimento)
         @Html.TextBoxFor(a => a.DataNascimento, new { placeholder = "XX/XX/XXXX", @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.DataNascimento)
     </div>
     <div class="form-group">
         @Html.CheckBoxFor(a => a.Bolsa)
@@ -23,11 +26,13 @@
     <div class="form-group">
         @Html.LabelFor(a => a.Desconto)
         @Html.TextBoxFor(a => a.Desconto, new { placeholder = "%", @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Desconto)
     </div>
     <div class="form-group">
         @Html.LabelFor(a => a.GrupoId)
         @Html.DropDownListFor(a => a.GrupoId,
             Model.ListaGrupo, "Selecione", new { @class = "form-control"})
+        @Html.ValidationMessageFor( a => a.GrupoId)
     </div>
     <div class="form-group">
         @Helper.Submit("Salvar", "btn btn-primary")

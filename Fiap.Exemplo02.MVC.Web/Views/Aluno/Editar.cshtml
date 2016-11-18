@@ -1,4 +1,4 @@
-﻿@model Fiap.Exemplo02.MVC.Web.Models.Aluno
+﻿@model Fiap.Exemplo02.MVC.Web.ViewModels.AlunoViewModel
 @{
     ViewBag.Title = "Editar";
 }
@@ -24,9 +24,9 @@
         @Html.LabelFor(a => a.Bolsa)
     </div>
     <div class="form-group">
-        @Html.LabelFor(a => a.Grupo)
+        @Html.LabelFor(a => a.GrupoId)
         @Html.DropDownListFor(a => a.GrupoId,
-            ViewBag.grupos as SelectList, "Selecione", new { @class = "form-control" })
+            Model.ListaGrupo, "Selecione", new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Helper.Submit("Atualizar", "btn btn-primary")

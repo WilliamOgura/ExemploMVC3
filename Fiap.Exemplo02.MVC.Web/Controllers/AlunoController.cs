@@ -16,11 +16,13 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
         #region GET
         [HttpGet]
-        public ActionResult Cadastro()
+        public ActionResult Cadastro(string msg)
         {
             var viewModel = new AlunoViewModel()
             {
-                ListaGrupo = ListarGrupos()
+                ListaGrupo = ListarGrupos(),
+                Mensagem = msg
+                
             };
             
             return View(viewModel);
@@ -36,39 +38,51 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Listar()
         {
             //Include -> Busca o relacionamento (preenche o grupo que o aluno possui), faz o join
-            var lista = _unit.AlunoRepository.Listar();
+            var viewModel = new AlunoViewModel()
+            {
+                Alunos = _unit.AlunoRepository.Listar(),
+                ListaGrupo = ListarGrupos()
+                
+            };
             CarregarComboGrupo();
-            return View(lista);
+            return View(viewModel);
         }
 
         [HttpGet]
         public ActionResult Editar(int id)
         {
-            var lista = _unit.GrupoRepository.Listar();
-            ViewBag.grupos = new SelectList(lista, "Id", "Nome");
             //Buscar o objeto (aluno no banco
             var aluno = _unit.AlunoRepository.BuscarPorId(id);
-            // manda o aluno para a view
-            return View(aluno);
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                Nome = aluno.Nome,
+                Bolsa = aluno.Bolsa,
+                Desconto = aluno.Desconto,
+                Id = aluno.Id,
+                DataNascimento = aluno.DataNascimento,
+                GrupoId = aluno.GrupoId
+             };
+             // manda o aluno para a view
+            return View(viewModel);
         }
 
         [HttpGet]
-        public ActionResult Buscar(string nomeBusca, int? idGrupo)
+        public ActionResult Buscar(string nomeBusca, int? IdBusca)
         {
             ICollection<Aluno> lista;
-            if (idGrupo == null)
-            {
-                //Busca O aluno no banco por parte do nome
-                lista = _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca)).ToList();
-            }
-            else
-            {
-                lista = _unit.AlunoRepository.BuscarPor(a => a.Nome.Contains(nomeBusca) && a.GrupoId == idGrupo);
-            }
+           
+                lista = _unit.AlunoRepository.BuscarPor(a => 
+                a.Nome.Contains(nomeBusca) && (a.GrupoId == IdBusca ||   IdBusca == null));
+            
             CarregarComboGrupo();
-
+            var viewModel = new AlunoViewModel()
+            {
+                ListaGrupo = ListarGrupos(),
+                Alunos = lista
+            };
             //retorna para a view Listar com a lista
-            return View("Listar", lista);
+            return View("Listar", viewModel);
         }
 
         #endregion
@@ -76,13 +90,31 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
 
         #region POST
         [HttpPost]
-        public ActionResult Cadastro(Aluno aluno)
+        public ActionResult Cadastro(AlunoViewModel alunoViewModel)
         {
+            //automap
+            if (ModelState.IsValid)
+            {
+                var aluno = new Aluno()
+                {
+                    Nome = alunoViewModel.Nome,
+                    DataNascimento = alunoViewModel.DataNascimento,
+                    Bolsa = alunoViewModel.Bolsa,
+                    Desconto = alunoViewModel.Desconto,
+                    GrupoId = alunoViewModel.GrupoId,
+                    Id = alunoViewModel.Id,
 
-            _unit.AlunoRepository.Cadastrar(aluno);
-            _unit.Salvar();
-            TempData["msg"] = "Aluno Cadastrado";
-            return RedirectToAction("Cadastro");
+
+                };
+                _unit.AlunoRepository.Cadastrar(aluno);
+                _unit.Salvar();
+                return RedirectToAction("Cadastro", new { msg = "Aluno Cadastrado" });
+            }
+            else
+            {
+                alunoViewModel.ListaGrupo = ListarGrupos();
+                return View(alunoViewModel);
+            }
         }
 
         [HttpPost]
@@ -90,8 +122,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         {
             _unit.AlunoRepository.Atualizar(aluno);
             _unit.Salvar();
-            TempData["msg"] = "Aluno atualizado";
-            return RedirectToAction("Listar");
+            return RedirectToAction("Listar", new { msg = "Aluno Editado"});
         }
         [HttpPost]
         public ActionResult Excluir(int AlunoId)
