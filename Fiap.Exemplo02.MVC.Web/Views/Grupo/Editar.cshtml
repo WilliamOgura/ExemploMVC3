@@ -23,6 +23,7 @@
         @Html.LabelFor(g => g.Projeto.DataInicio)
         @Html.TextBoxFor(g => g.Projeto.DataInicio, new { @class = "form-control" })
     </div>
+        @Html.TextBoxFor(g => g.Projeto.Id, new { type = "hidden" })
     <div class="form-group">
         @Helper.Submit("Salvar", "btn btn-primary")
     </div>

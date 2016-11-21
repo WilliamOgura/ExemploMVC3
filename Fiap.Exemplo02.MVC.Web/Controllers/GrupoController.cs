@@ -43,6 +43,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
         public ActionResult Editar(Grupo grupo)
         {
             _unit.GrupoRepository.Atualizar(grupo);
+            _unit.ProjetoRepository.Atualizar(grupo.Projeto);
             _unit.Salvar();
             TempData["msg"] = "Grupo atualizado";
             return RedirectToAction("Listar");

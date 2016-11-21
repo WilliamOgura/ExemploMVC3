@@ -41,6 +41,20 @@ namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
                 return _grupoRepository;
             }
         }
+        //PROJETO
+        private IGenericRepository<Projeto> _projetoRepository;
+
+        public IGenericRepository<Projeto> ProjetoRepository
+        {
+            get
+            {
+                if (_projetoRepository == null)
+                {
+                    _projetoRepository = new GenericRepository<Projeto>(_context);
+                }
+                return _projetoRepository;
+            }
+        }
 
         private IProfessorRepository _professorRepository;
         public IProfessorRepository ProfessorRepository
