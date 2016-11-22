@@ -21,8 +21,9 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             var viewModel = new AlunoViewModel()
             {
                 ListaGrupo = ListarGrupos(),
-                Mensagem = msg
-                
+                Mensagem = msg,
+                DataNascimento = DateTime.Now
+
             };
             
             return View(viewModel);
@@ -82,7 +83,7 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
                 Alunos = lista
             };
             //retorna para a view Listar com a lista
-            return View("Listar", viewModel);
+            return PartialView("_tabela", lista);
         }
 
         #endregion

@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(g => g.Projeto.DataInicio)
-        @Html.TextBoxFor(g => g.Projeto.DataInicio, new { placeholder = "XX/XX/XXXX", @class = "form-control" })
+        @Html.TextBoxFor(g => g.Projeto.DataInicio, new {@class = "form-control" })
     </div>
     <div class="form-group">
         @Helper.Submit("Salvar", "btn btn-primary")

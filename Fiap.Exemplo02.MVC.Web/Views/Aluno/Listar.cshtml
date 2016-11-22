@@ -6,7 +6,8 @@
 <h2>Listar Alunos</h2>
 @Helper.Message(Model.Mensagem, "alert alert-success")
 
-@using (Html.BeginForm("Buscar", "Aluno", FormMethod.Get, new { @class = "form-inline" }))
+@using (Ajax.BeginForm("Buscar", null, new AjaxOptions { HttpMethod = "get",
+    UpdateTargetId = "tabela", InsertionMode = InsertionMode.Replace } , new {@id = "formularioBusca", @class = "form-inline" }))
 {
     <div class="row">
         <div class="col-md-3">
@@ -19,6 +20,8 @@
             @Helper.Submit("Buscar", "btn btn-primary")
         </div>
     </div>
+
+   
     
 }
 
@@ -33,23 +36,8 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var aluno in Model.Alunos)
-            {
-            <tr>
-                <td>@aluno.Nome</td>
-                <td>@aluno.DataNascimento</td>
-                <td>@(aluno.Bolsa?"Sim":"Não")</td>
-                <td>@aluno.Desconto</td>
-                <td>@aluno.Grupo.Nome</td>
-                <td>
-                    @Html.ActionLink("Editar", "Editar", new { id = @aluno.Id }, new { @class = "btn btn-primary" })
-                    <button onclick="alunoId.value = @aluno.Id" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-                        Excluir
-                    </button>
-                </td>
-            </tr>
-        }
+    <tbody id="tabela">
+       @Html.Partial("_tabela", Model.Alunos)
     </tbody>
 </table>
 
@@ -78,3 +66,31 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        function someBotao(){
+            //esconder os botões de ações da tabela
+            $("td > button, td > a").css("visibility", "hidden");
+        
+            //Quando o mouse passar por cima da linha, exibe os botões
+            $("tr").hover(function(){
+                $(this).find("button,a").css("visibility", "visible")
+            }, function(){
+                $(this).find("button,a").css("visibility", "hidden")
+            })
+        }
+        $().ready(function(){
+            someBotao();
+
+            
+        
+            //Selecionar o Select da Busca de Grupos
+            $("#IdBusca").change(function () {
+                //seleciona o formulário e faz o submit
+                $("#formularioBusca").submit();
+
+            });
+        });
+    </script>
+}
