@@ -41,6 +41,32 @@
 @section scripts{
     <script>
         $().ready(function () {
+            
+            $("#Nome").blur(function () {
+                //Valida Nome com AJAX!!
+                $.ajax({
+                    url: "http://localhost:51102/Aluno/ValidarNome",
+                    type: "GET",
+                    data: { nome: $("#Nome").val() },
+                    success: function (data) {
+                        if (data.existe) {
+                            // alert("Nome Disponivel");
+                            var erro = $("span[data-valmsg-for=Nome");
+                            erro.addClass("field-validation-error").removeClass("field-validation-valid");
+                            erro.html("<span>Nome já cadastrado</span>");
+                        }
+                    },
+                    error: function () {
+                        alert("Erro ao requisitar o servidor");
+                    }
+
+
+                });
+            });
+            
+
+
+
             //Quando clicar no checkbox Bolsa
             if ($("#Bolsa").attr("checked") == "checked") {
                 $("#Desconto").parent().css("display", "block");
@@ -49,11 +75,14 @@
             }
             
             $("#DataNascimento").datepicker();
+
             $("#Bolsa").click(function () {
                 //Esconde ou exibe a div
                 $("#Desconto").parent().slideToggle();
                 $("#Desconto").focus();
             });
         });
+
+
     </script>
 }

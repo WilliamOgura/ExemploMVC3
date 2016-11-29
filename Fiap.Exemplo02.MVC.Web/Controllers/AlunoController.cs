@@ -85,6 +85,13 @@ namespace Fiap.Exemplo02.MVC.Web.Controllers
             //retorna para a view Listar com a lista
             return PartialView("_tabela", lista);
         }
+        [HttpGet]
+        public ActionResult ValidarNome(string nome)
+        {
+            var aluno = _unit.AlunoRepository.BuscarPor(a => a.Nome == nome);
+            //Retorna um JSON { "existe" : true/false }
+            return Json (new { existe = aluno.Any() }, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
