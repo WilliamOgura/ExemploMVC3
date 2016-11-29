@@ -7,20 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fiap.Exemplo02.MVC.Web.Models
-{
+namespace Fiap.Exemplo02.Dominio.Models {
+
     using System;
     using System.Collections.Generic;
     
-    public partial class Projeto
+    public partial class C__RefactorLog
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Descricao { get; set; }
-        public Nullable<System.DateTime> DataInicio { get; set; }
-        public Nullable<System.DateTime> dataTermino { get; set; }
-        public bool Entregue { get; set; }
-    
-        public virtual Grupo Grupo { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }
