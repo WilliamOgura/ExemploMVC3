@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
+namespace Fiap.Exemplo02.MVC.Persistencia.UnitsOfWork
 {
     public class UnitOfWork : IDisposable
     {

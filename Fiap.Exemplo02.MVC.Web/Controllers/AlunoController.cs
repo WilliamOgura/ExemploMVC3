@@ -1,5 +1,5 @@
 ﻿using Fiap.Exemplo02.Dominio.Models;
-using Fiap.Exemplo02.MVC.Web.UnitsOfWork;
+using Fiap.Exemplo02.MVC.Persistencia.UnitsOfWork;
 using Fiap.Exemplo02.MVC.Web.ViewModels;
 using System;
 using System.Collections.Generic;
