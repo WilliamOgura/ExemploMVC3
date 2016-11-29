@@ -24,5 +24,18 @@ namespace Fiap.Exemplo02.Service.Controllers
         {
             return _unit.AlunoRepository.BuscarPorId(id);
         }
+
+        public IHttpActionResult Cadastro(Aluno aluno)
+        {
+            if (ModelState.IsValid) {
+                _unit.AlunoRepository.Cadastrar(aluno);
+                _unit.Salvar();
+                var uri = Url.Link("http://localhost:51102/api/aluno", new { id = aluno.Id });
+                return Created<Aluno>(new Uri(uri), aluno);
+            }
+            else { }
+            // manda o aluno para a view
+            return BadRequest(ModelState);
+        }
     }
 }
