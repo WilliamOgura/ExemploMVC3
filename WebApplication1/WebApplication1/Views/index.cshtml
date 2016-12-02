@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>Lista dos melhores alunos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome : </th>
+            <th>Bolsa : </th>
+            <th>Desconto : </th>
+            <th>Data De Nascimento : </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th></th>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    $.ajax({
+        url: "http://localhost:22345/api/cliente/",
+        method: "GET",
+        success: function (data) {
+            alert("Sucesso!");
+        },
+        error: function (data) {
+            alert("Erro!");
+        }
+    });
+</script>
