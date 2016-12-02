@@ -9,6 +9,7 @@ namespace Fiap.Exemplo02.MVC.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config
             // Web API configuration and services
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
