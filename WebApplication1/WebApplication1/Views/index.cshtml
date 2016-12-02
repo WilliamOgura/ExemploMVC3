@@ -26,10 +26,16 @@
         url: "http://localhost:22345/api/cliente/",
         method: "GET",
         success: function (data) {
-            alert("Sucesso!");
-        },
-        error: function (data) {
-            alert("Erro!");
-        }
+            $.each(data, function (index, item) {
+                //Criar nova linha
+                var linha = $("<tr>");
+                linha.append($("<td>").text(item.nome));
+                linha.append($("<td>").text(item.bolsa));
+                linha.append($("<td>").text(item.desconto));
+                linha.append($("<td>").text(item.dataNascimento));
+
+                $("tbody").append(linha);
+            });
+         }
     });
 </script>

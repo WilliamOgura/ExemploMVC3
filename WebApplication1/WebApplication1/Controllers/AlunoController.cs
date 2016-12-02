@@ -13,12 +13,7 @@ namespace WebApplication1.Controllers
         public ActionResult index()
         {
 
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Action()
-        {
-            return View();
+            return index();
         }
     }
 }
